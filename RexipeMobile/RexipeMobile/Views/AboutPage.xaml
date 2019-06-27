@@ -7,11 +7,11 @@
              x:Class="RexipeMobile.Views.AboutPage"
              xmlns:vm="clr-namespace:RexipeMobile.ViewModels"
              Title="{Binding Title}">
-    
+
     <ContentPage.BindingContext>
         <vm:AboutViewModel />
     </ContentPage.BindingContext>
-    
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <Color x:Key="Primary">#2196F3</Color>
@@ -77,5 +77,5 @@
             </StackLayout>
         </ScrollView>
     </Grid>
-    
+
 </ContentPage>

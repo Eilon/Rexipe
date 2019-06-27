@@ -34,9 +34,9 @@ namespace RexipeMobile.Services
             return items;
         }
 
-        public async Task<Item> GetItemAsync(string id)
+        public async Task<Item> GetItemAsync(int id)
         {
-            if (id != null && IsConnected)
+            if (IsConnected)
             {
                 var json = await client.GetStringAsync($"api/item/{id}");
                 return await Task.Run(() => JsonConvert.DeserializeObject<Item>(json));
@@ -59,7 +59,7 @@ namespace RexipeMobile.Services
 
         public async Task<bool> UpdateItemAsync(Item item)
         {
-            if (item == null || item.Id == null || !IsConnected)
+            if (item == null || !IsConnected)
                 return false;
 
             var serializedItem = JsonConvert.SerializeObject(item);
@@ -71,9 +71,9 @@ namespace RexipeMobile.Services
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<bool> DeleteItemAsync(string id)
+        public async Task<bool> DeleteItemAsync(int id)
         {
-            if (string.IsNullOrEmpty(id) && !IsConnected)
+            if (!IsConnected)
                 return false;
 
             var response = await client.DeleteAsync($"api/item/{id}");

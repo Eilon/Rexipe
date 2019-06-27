@@ -26,8 +26,14 @@
         </ResourceDictionary>
     </Shell.Resources>
 
-    <FlyoutItem Title="Feed">
-        <Tab Title="Browse" Icon="tab_feed.png">
+    <FlyoutItem Title="Recipes">
+        <Tab Title="My Recipes" Icon="tab_feed.png">
+            <ShellContent ContentTemplate="{DataTemplate local:RecipesPage}" />
+        </Tab>
+        <Tab Title="Favorite Recipes" Icon="tab_feed.png">
+            <ShellContent ContentTemplate="{DataTemplate local:ItemsPage}" />
+        </Tab>
+        <Tab Title="All Recipes" Icon="tab_feed.png">
             <ShellContent ContentTemplate="{DataTemplate local:ItemsPage}" />
         </Tab>
     </FlyoutItem>

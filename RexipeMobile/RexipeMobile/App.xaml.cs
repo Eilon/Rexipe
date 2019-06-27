@@ -21,9 +21,17 @@ namespace RexipeMobile
             InitializeComponent();
 
             if (UseMockDataStore)
+            {
                 DependencyService.Register<MockDataStore>();
+            }
             else
+            {
                 DependencyService.Register<AzureDataStore>();
+            }
+
+            DependencyService.Register<MockRecipeStore>();
+
+
             MainPage = new AppShell();
         }
 

@@ -10,7 +10,7 @@ using RexipeMobile.Views;
 
 namespace RexipeMobile.ViewModels
 {
-    public class ItemsViewModel : BaseViewModel
+    public class ItemsViewModel : BaseViewModelWithDataStore
     {
         public ObservableCollection<Item> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
