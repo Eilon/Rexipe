@@ -41,7 +41,7 @@
                                 LineBreakMode="NoWrap" 
                                 Style="{DynamicResource ListItemTextStyle}" 
                                 FontSize="16" />
-                            <Label Text="{Binding ServingsMin}" 
+                            <Label Text="{Binding ., Converter={StaticResource recipeServingsConverter}}" 
                                 d:Text="Servings"
                                 LineBreakMode="NoWrap"
                                 Style="{DynamicResource ListItemDetailTextStyle}"
