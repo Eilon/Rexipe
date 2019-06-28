@@ -7,11 +7,52 @@
              x:Class="RexipeMobile.Views.RecipeDetailPage"
              Title="{Binding Title}">
 
-    <StackLayout Spacing="20" Padding="15">
-        <Label Text="Title:" FontSize="Medium" />
-        <Label Text="{Binding Recipe.Title}" d:Text="Title" FontSize="Small"/>
-        <Label Text="Servings:" FontSize="Medium" />
-        <Label Text="{Binding Recipe.ServingsMin}" d:Text="Min servings" FontSize="Small"/>
-    </StackLayout>
-    
+    <ScrollView>
+        <StackLayout 
+            Spacing="20" 
+            Padding="15"
+            VerticalOptions="FillAndExpand">
+
+            <Label Text="Title:" FontSize="Medium" />
+            <Label Text="{Binding Recipe.Title}" d:Text="Title" FontSize="Small"/>
+
+            <Label Text="Ready in:" FontSize="Medium" />
+            <Label Text="{Binding Recipe.ReadyTime, Converter={StaticResource timeSpanConverter}}" d:Text="1hr 15min" FontSize="Small"/>
+
+            <Label Text="Servings:" FontSize="Medium" />
+            <Label Text="{Binding Recipe, Converter={StaticResource recipeServingsConverter}}" d:Text="Min servings" FontSize="Small"/>
+
+            <Label Text="Ingredients:" FontSize="Medium" />
+            <StackLayout BindableLayout.ItemsSource="{Binding Recipe.Ingredients}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal"  Padding="10">
+                            <Label Text="{Binding Quantity}"
+                                    d:Text="{Binding .}"
+                                    FontSize="16" />
+                            <Label Text="{Binding Ingredient.Name}"
+                                    d:Text="Servings"
+                                    FontSize="14" />
+                        </StackLayout>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+
+            <Label Text="Directions:" FontSize="Medium" />
+            <StackLayout BindableLayout.ItemsSource="{Binding Recipe.Directions}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal"  Padding="10">
+                            <Label Text="{Binding Direction}"
+                                    d:Text="{Binding .}"
+                                    FontSize="16" />
+                        </StackLayout>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+
+        </StackLayout>
+    </ScrollView>
+
 </ContentPage>
+    

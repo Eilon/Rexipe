@@ -27,7 +27,7 @@
                     <x:String>First Recipe</x:String>
                     <x:String>Second Recipe</x:String>
                     <x:String>Third Recipe</x:String>
-                    <x:String>Forth Recipe</x:String>
+                    <x:String>Fourth Recipe</x:String>
                     <x:String>Fifth Recipe</x:String>
                     <x:String>Sixth Recipe</x:String>
                 </x:Array>
@@ -36,12 +36,12 @@
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Padding="10">
-                            <Label Text="{Binding Title}" 
+                            <Label Text="{Binding Title}"
                                 d:Text="{Binding .}"
                                 LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
+                                Style="{DynamicResource ListItemTextStyle}"
                                 FontSize="16" />
-                            <Label Text="{Binding ., Converter={StaticResource recipeServingsConverter}}" 
+                            <Label Text="{Binding ., Converter={StaticResource recipeServingsConverter}}"
                                 d:Text="Servings"
                                 LineBreakMode="NoWrap"
                                 Style="{DynamicResource ListItemDetailTextStyle}"

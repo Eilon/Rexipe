@@ -8,6 +8,7 @@
              x:Class="RexipeMobile.App">
     <Application.Resources>
         <cvt:RecipeServingsConverter x:Key="recipeServingsConverter" />
+        <cvt:TimeSpanConverter x:Key="timeSpanConverter" />
     </Application.Resources>
 </Application>
     
