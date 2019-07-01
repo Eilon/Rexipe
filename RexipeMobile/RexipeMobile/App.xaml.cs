@@ -14,7 +14,8 @@ namespace RexipeMobile
         //If using other emulators besides stock Google images you may need to adjust the IP address
         public static string AzureBackendUrl =
             DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5000" : "http://localhost:5000";
-        public static bool UseMockDataStore = true;
+
+        public static bool UseMockDataStore = false;
 
         public App()
         {
@@ -23,14 +24,13 @@ namespace RexipeMobile
             if (UseMockDataStore)
             {
                 DependencyService.Register<MockDataStore>();
+                DependencyService.Register<MockRecipeStore>();
             }
             else
             {
                 DependencyService.Register<AzureDataStore>();
+                DependencyService.Register<HttpRecipeStore>();
             }
-
-            DependencyService.Register<MockRecipeStore>();
-
 
             MainPage = new AppShell();
         }

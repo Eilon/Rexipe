@@ -1,35 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Collections.Concurrent;
 using RexipeModels;
 
-namespace RexipeMobile.Services
+namespace RexipeMobile.Models
 {
-    public class MockRecipeStore : IRecipeStore
+    public class RecipeRepository : IRecipeRepository
     {
-        readonly List<Recipe> _recipes;
+        private static readonly ConcurrentDictionary<int, Recipe> recipes = new ConcurrentDictionary<int, Recipe>();
 
-        public MockRecipeStore()
+        public RecipeRepository()
         {
-            _recipes = new List<Recipe>();
-
             var eilonAuthor = new RecipeAuthor
             {
                 Id = 1,
-                Name = "Eilon Lipton",
+                Name = "HTTP Eilon Lipton",
             };
             var otherAuthor = new RecipeAuthor
             {
                 Id = 2,
-                Name = "Secret Chef",
+                Name = "HTTP Secret Chef",
             };
 
-            var mockRecipes = new List<Recipe>
+            var mockItems = new List<Recipe>
             {
                 new Recipe {
                     Id = 1,
-                    Title = "Famous BBQ chicken",
+                    Title = "HTTP Famous BBQ chicken",
                     CookTime = TimeSpan.FromHours(2.5),
                     PrepTime = TimeSpan.FromHours(0.75),
                     ReadyTime = TimeSpan.FromHours(4),
@@ -57,7 +54,7 @@ namespace RexipeMobile.Services
 
                 new Recipe {
                     Id = 2,
-                    Title = "Awesome lasagna",
+                    Title = "HTTP Awesome lasagna",
                     CookTime = TimeSpan.FromHours(2.5),
                     PrepTime = TimeSpan.FromHours(0.75),
                     ReadyTime = TimeSpan.FromHours(4),
@@ -84,7 +81,7 @@ namespace RexipeMobile.Services
 
                 new Recipe {
                     Id = 2,
-                    Title = "Apple pie",
+                    Title = "HTTP Apple pie",
                     CookTime = TimeSpan.FromHours(1),
                     PrepTime = TimeSpan.FromHours(0.25),
                     ReadyTime = TimeSpan.FromHours(1.5),
@@ -110,7 +107,7 @@ namespace RexipeMobile.Services
 
                 new Recipe {
                     Id = 3,
-                    Title = "Breakfast cereal",
+                    Title = "HTTP Breakfast cereal",
                     CookTime = TimeSpan.FromMinutes(0),
                     PrepTime = TimeSpan.FromMinutes(2),
                     ReadyTime = TimeSpan.FromMinutes(2),
@@ -132,7 +129,7 @@ namespace RexipeMobile.Services
 
                 new Recipe {
                     Id = 4,
-                    Title = "Slow cooker chili",
+                    Title = "HTTP Slow cooker chili",
                     CookTime = TimeSpan.FromHours(6),
                     PrepTime = TimeSpan.FromMinutes(5),
                     ReadyTime = TimeSpan.FromHours(6),
@@ -153,44 +150,41 @@ namespace RexipeMobile.Services
                 },
             };
 
-            foreach (var recipe in mockRecipes)
+            foreach (var item in mockItems)
             {
-                _recipes.Add(recipe);
+                Add(item);
             }
         }
 
-        public Task<bool> AddRecipeAsync(Recipe recipe)
+        public IEnumerable<Recipe> GetAll()
         {
-            _recipes.Add(recipe);
-
-            return Task.FromResult(true);
+            return recipes.Values;
         }
 
-        public Task<bool> UpdateRecipeAsync(Recipe recipe)
+        public void Add(Recipe recipe)
         {
-            var oldRecipe = _recipes.Where((Recipe arg) => arg.Id == recipe.Id).FirstOrDefault();
-            _recipes.Remove(oldRecipe);
-            _recipes.Add(recipe);
-
-            return Task.FromResult(true);
+            // TODO: Use auto-id
+            recipe.Id = recipes.Count + 1;
+            recipes[recipe.Id] = recipe;
         }
 
-        public Task<bool> DeleteRecipeAsync(int id)
+        public Recipe Get(int id)
         {
-            var oldRecipe = _recipes.Where((Recipe arg) => arg.Id == id).FirstOrDefault();
-            _recipes.Remove(oldRecipe);
+            recipes.TryGetValue(id, out var recipe);
 
-            return Task.FromResult(true);
+            return recipe;
         }
 
-        public Task<Recipe> GetRecipeAsync(int id)
+        public Recipe Remove(int id)
         {
-            return Task.FromResult(_recipes.FirstOrDefault(s => s.Id == id));
+            recipes.TryRemove(id, out var recipe);
+
+            return recipe;
         }
 
-        public Task<IEnumerable<Recipe>> GetRecipeAsync(bool forceRefresh = false)
+        public void Update(Recipe recipe)
         {
-            return Task.FromResult(_recipes.AsEnumerable());
+            recipes[recipe.Id] = recipe;
         }
     }
 }

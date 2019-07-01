@@ -6,10 +6,10 @@ namespace RexipeMobile.Services
 {
     public interface IRecipeStore
     {
-        Task<bool> AddItemAsync(Recipe item);
-        Task<bool> DeleteItemAsync(int id);
-        Task<Recipe> GetItemAsync(int id);
-        Task<IEnumerable<Recipe>> GetItemsAsync(bool forceRefresh = false);
-        Task<bool> UpdateItemAsync(Recipe item);
+        Task<bool> AddRecipeAsync(Recipe recipe);
+        Task<bool> DeleteRecipeAsync(int id);
+        Task<Recipe> GetRecipeAsync(int id);
+        Task<IEnumerable<Recipe>> GetRecipeAsync(bool forceRefresh = false);
+        Task<bool> UpdateRecipeAsync(Recipe recipe);
     }
 }

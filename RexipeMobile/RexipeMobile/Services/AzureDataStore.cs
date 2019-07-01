@@ -22,7 +22,8 @@ namespace RexipeMobile.Services
             items = new List<Item>();
         }
 
-        bool IsConnected => Connectivity.NetworkAccess != NetworkAccess.Internet;
+        bool IsConnected => Connectivity.NetworkAccess == NetworkAccess.Internet;
+
         public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
         {
             if (forceRefresh && IsConnected)

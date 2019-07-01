@@ -25,10 +25,11 @@ namespace RexipeMobile.MobileAppService
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSingleton<IItemRepository, ItemRepository>();
+            services.AddSingleton<IRecipeRepository, RecipeRepository>();
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+                c.SwaggerDoc("v1", new Info { Title = "Rexipe API", Version = "v1" });
             });
         }
 
@@ -41,15 +42,17 @@ namespace RexipeMobile.MobileAppService
             else
             {
                 app.UseHsts();
+
+                // Emulators don't trust the HTTPS dev cert used by ASP.NET Core, so use HTTPS only in Staging/Production
+                app.UseHttpsRedirection();
             }
 
-            app.UseHttpsRedirection();
             app.UseMvc();
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Rexipe API V1");
             });
         }
     }

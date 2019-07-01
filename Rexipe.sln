@@ -7,11 +7,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RexipeMobile.Android", "Rex
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RexipeMobile.iOS", "RexipeMobile\RexipeMobile.iOS\RexipeMobile.iOS.csproj", "{3027387A-6FE4-4D43-B751-583F7E532C3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RexipeMobile.MobileAppService", "RexipeMobile\RexipeMobile.MobileAppService\RexipeMobile.MobileAppService.csproj", "{E4E9B059-5799-47A2-A35B-A8B84A3BAEE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RexipeMobile.MobileAppService", "RexipeMobile\RexipeMobile.MobileAppService\RexipeMobile.MobileAppService.csproj", "{E4E9B059-5799-47A2-A35B-A8B84A3BAEE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RexipeMobile", "RexipeMobile\RexipeMobile\RexipeMobile.csproj", "{ED8CCB87-2C1B-4DD1-B507-C838193D9F66}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RexipeMobile", "RexipeMobile\RexipeMobile\RexipeMobile.csproj", "{ED8CCB87-2C1B-4DD1-B507-C838193D9F66}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E4E9B059-5799-47A2-A35B-A8B84A3BAEE7} = {E4E9B059-5799-47A2-A35B-A8B84A3BAEE7}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RexipeModels", "RexipeModels\RexipeModels.csproj", "{88C84F88-D6EC-4E94-AF1B-A1F6A9320B86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RexipeModels", "RexipeModels\RexipeModels.csproj", "{88C84F88-D6EC-4E94-AF1B-A1F6A9320B86}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

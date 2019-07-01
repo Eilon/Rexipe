@@ -1,20 +1,17 @@
-﻿using System;
+﻿using RexipeMobile.Services;
+using RexipeMobile.Views;
+using RexipeModels;
+using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
-
-using RexipeMobile.Models;
-using RexipeMobile.Views;
-using RexipeModels;
-using RexipeMobile.Services;
 
 namespace RexipeMobile.ViewModels
 {
     public class RecipesViewModel : BaseViewModel
     {
-        public MockRecipeStore DataStore => DependencyService.Get<MockRecipeStore>();
+        public IRecipeStore DataStore => DependencyService.Get<IRecipeStore>();
 
         public ObservableCollection<Recipe> Recipes { get; set; }
         public Command LoadRecipesCommand { get; set; }
@@ -25,11 +22,11 @@ namespace RexipeMobile.ViewModels
             Recipes = new ObservableCollection<Recipe>();
             LoadRecipesCommand = new Command(async () => await ExecuteLoadRecipesCommand());
 
-            MessagingCenter.Subscribe<NewRecipePage, Recipe>(this, "AddRecipe", async (obj, item) =>
+            MessagingCenter.Subscribe<NewRecipePage, Recipe>(this, "AddRecipe", async (obj, recipe) =>
             {
-                var newRecipe = item as Recipe;
+                var newRecipe = recipe as Recipe;
                 Recipes.Add(newRecipe);
-                await DataStore.AddItemAsync(newRecipe);
+                await DataStore.AddRecipeAsync(newRecipe);
             });
         }
 
@@ -43,10 +40,10 @@ namespace RexipeMobile.ViewModels
             try
             {
                 Recipes.Clear();
-                var items = await DataStore.GetItemsAsync(true);
-                foreach (var item in items)
+                var recipes = await DataStore.GetRecipeAsync(true);
+                foreach (var recipe in recipes)
                 {
-                    Recipes.Add(item);
+                    Recipes.Add(recipe);
                 }
             }
             catch (Exception ex)
