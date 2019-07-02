@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RexipeMobile.Models;
@@ -21,17 +22,17 @@ namespace RexipeMobile.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<IEnumerable<Recipe>> List()
+        public async Task<ActionResult<IEnumerable<Recipe>>> List()
         {
-            return _recipeRepository.GetAll().ToList();
+            return (await _recipeRepository.GetAll()).ToList();
         }
 
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<Recipe> GetRecipe(int id)
+        public async Task<ActionResult<Recipe>> GetRecipe(int id)
         {
-            Recipe recipe = _recipeRepository.Get(id);
+            var recipe = await _recipeRepository.Get(id);
 
             if (recipe == null)
                 return NotFound();
@@ -42,20 +43,20 @@ namespace RexipeMobile.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<Recipe> Create([FromBody]Recipe recipe)
+        public async Task<ActionResult<Recipe>> Create([FromBody]Recipe recipe)
         {
-            _recipeRepository.Add(recipe);
+            await _recipeRepository.Add(recipe);
             return CreatedAtAction(nameof(GetRecipe), new { recipe.Id }, recipe);
         }
 
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult Edit([FromBody] Recipe recipe)
+        public async Task<ActionResult> Edit([FromBody] Recipe recipe)
         {
             try
             {
-                _recipeRepository.Update(recipe);
+                await _recipeRepository.Update(recipe);
             }
             catch (Exception)
             {
@@ -67,9 +68,9 @@ namespace RexipeMobile.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            Recipe recipe = _recipeRepository.Remove(id);
+            var recipe = await _recipeRepository.Remove(id);
 
             if (recipe == null)
                 return NotFound();

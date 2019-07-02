@@ -1,15 +1,16 @@
 ﻿using RexipeModels;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace RexipeMobile.Models
 {
     public interface IRecipeRepository
     {
-        void Add(Recipe recipe);
-        void Update(Recipe recipe);
-        Recipe Remove(int id);
-        Recipe Get(int id);
-        IEnumerable<Recipe> GetAll();
+        Task Add(Recipe recipe);
+        Task Update(Recipe recipe);
+        Task<Recipe> Remove(int id);
+        Task<Recipe> Get(int id);
+        Task<IEnumerable<Recipe>> GetAll();
     }
 }

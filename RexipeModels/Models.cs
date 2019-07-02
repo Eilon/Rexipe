@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace RexipeModels
 {
     public class Recipe
     {
         public int Id { get; set; }
+        [Required]
         public string Title { get; set; }
         public List<IngredientQuantity> Ingredients { get; set; }
         public List<RecipeDirection> Directions { get; set; }
@@ -17,6 +19,7 @@ namespace RexipeModels
         public TimeSpan PrepTime { get; set; }
         public TimeSpan CookTime { get; set; }
         public TimeSpan ReadyTime { get; set; }
+        [Required]
         public RecipeAuthor Author { get; set; }
         // TODO: Add list of special items needed (e.g. slow cooker, pans, etc.)
         // TODO: Add tags/keywords
@@ -33,12 +36,14 @@ namespace RexipeModels
     public class RecipeAuthor
     {
         public int Id { get; set; }
+        [Required]
         public string Name { get; set; }
     }
 
     public class RecipeTip
     {
         public int Id { get; set; }
+        [Required]
         public string Text { get; set; }
         public Image Image { get; set; }
     }
@@ -46,6 +51,7 @@ namespace RexipeModels
     public class RecipeDirection
     {
         public int Id { get; set; }
+        [Required]
         public string Direction { get; set; }
         // TODO: Ingredient references
     }
@@ -53,6 +59,7 @@ namespace RexipeModels
     public class IngredientQuantity
     {
         public int Id { get; set; }
+        [Required]
         public Ingredient Ingredient { get; set; }
         public ItemQuantity Quantity { get; set; }
     }
@@ -60,6 +67,7 @@ namespace RexipeModels
     public class Ingredient
     {
         public int Id { get; set; }
+        [Required]
         public string Name { get; set; }
         public Image Image { get; set; }
     }
@@ -70,6 +78,7 @@ namespace RexipeModels
         public string Caption { get; set; }
 
         // TODO: What type to use for this?
+        [Required]
         public byte[] Bytes { get; set; }
     }
 

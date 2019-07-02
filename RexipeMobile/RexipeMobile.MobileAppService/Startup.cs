@@ -1,13 +1,12 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Swagger;
 using RexipeMobile.Models;
+using RexipeMobile.MobileAppService.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace RexipeMobile.MobileAppService
 {
@@ -24,8 +23,15 @@ namespace RexipeMobile.MobileAppService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddSingleton<IItemRepository, ItemRepository>();
-            services.AddSingleton<IRecipeRepository, RecipeRepository>();
+            services.AddScoped<IItemRepository, ItemRepository>();
+            services.AddScoped<IRecipeRepository, RecipeRepository>();
+
+
+            services.AddDbContext<RexipeDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("RexipeDb"));
+            });
+
 
             services.AddSwaggerGen(c =>
             {
