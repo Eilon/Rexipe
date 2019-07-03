@@ -23,12 +23,10 @@ namespace RexipeMobile
 
             if (UseMockDataStore)
             {
-                DependencyService.Register<MockDataStore>();
                 DependencyService.Register<MockRecipeStore>();
             }
             else
             {
-                DependencyService.Register<AzureDataStore>();
                 DependencyService.Register<HttpRecipeStore>();
             }
 

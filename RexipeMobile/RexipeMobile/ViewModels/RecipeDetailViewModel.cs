@@ -1,7 +1,4 @@
-﻿using System;
-
-using RexipeMobile.Models;
-using RexipeModels;
+﻿using RexipeModels;
 
 namespace RexipeMobile.ViewModels
 {

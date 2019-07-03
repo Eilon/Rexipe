@@ -31,10 +31,18 @@
             <ShellContent ContentTemplate="{DataTemplate local:RecipesPage}" />
         </Tab>
         <Tab Title="Favorite Recipes" Icon="tab_feed.png">
-            <ShellContent ContentTemplate="{DataTemplate local:ItemsPage}" />
+          <ShellContent>
+            <ContentPage>
+              <Label Text="Favorites go here!"></Label>
+            </ContentPage>
+          </ShellContent>
         </Tab>
         <Tab Title="All Recipes" Icon="tab_feed.png">
-            <ShellContent ContentTemplate="{DataTemplate local:ItemsPage}" />
+          <ShellContent>
+            <ContentPage>
+              <Label Text="More stuff goes here!"></Label>
+            </ContentPage>
+          </ShellContent>
         </Tab>
     </FlyoutItem>
     <FlyoutItem Title="About">
