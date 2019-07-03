@@ -26,12 +26,12 @@ namespace RexipeMobile.Controllers
             return (await _recipeRepository.GetAll()).ToList();
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{recipeId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<Recipe>> GetRecipeDetails(int id)
+        public async Task<ActionResult<Recipe>> GetRecipeDetails(int recipeId)
         {
-            var recipe = await _recipeRepository.GetRecipeDetails(id);
+            var recipe = await _recipeRepository.GetRecipeDetails(recipeId);
 
             if (recipe == null)
             {
@@ -39,6 +39,36 @@ namespace RexipeMobile.Controllers
             }
 
             return recipe;
+        }
+
+        [HttpGet("{recipeId}/ingredients")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<IEnumerable<IngredientQuantity>>> GetRecipeIngredients(int recipeId)
+        {
+            var ingredients = await _recipeRepository.GetRecipeIngredients(recipeId);
+
+            if (ingredients == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(ingredients);
+        }
+
+        [HttpGet("{recipeId}/directions")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<IEnumerable<IngredientQuantity>>> GetRecipeDirections(int recipeId)
+        {
+            var directions = await _recipeRepository.GetRecipeDirections(recipeId);
+
+            if (directions == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(directions);
         }
 
         //[HttpPost]
