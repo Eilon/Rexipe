@@ -159,36 +159,36 @@ namespace RexipeMobile.Services
             }
         }
 
-        public Task<bool> AddRecipeAsync(Recipe recipe)
-        {
-            _recipes.Add(recipe);
+        //public Task<bool> AddRecipeAsync(Recipe recipe)
+        //{
+        //    _recipes.Add(recipe);
 
-            return Task.FromResult(true);
-        }
+        //    return Task.FromResult(true);
+        //}
 
-        public Task<bool> UpdateRecipeAsync(Recipe recipe)
-        {
-            var oldRecipe = _recipes.Where((Recipe arg) => arg.Id == recipe.Id).FirstOrDefault();
-            _recipes.Remove(oldRecipe);
-            _recipes.Add(recipe);
+        //public Task<bool> UpdateRecipeAsync(Recipe recipe)
+        //{
+        //    var oldRecipe = _recipes.Where((Recipe arg) => arg.Id == recipe.Id).FirstOrDefault();
+        //    _recipes.Remove(oldRecipe);
+        //    _recipes.Add(recipe);
 
-            return Task.FromResult(true);
-        }
+        //    return Task.FromResult(true);
+        //}
 
-        public Task<bool> DeleteRecipeAsync(int id)
-        {
-            var oldRecipe = _recipes.Where((Recipe arg) => arg.Id == id).FirstOrDefault();
-            _recipes.Remove(oldRecipe);
+        //public Task<bool> DeleteRecipeAsync(int id)
+        //{
+        //    var oldRecipe = _recipes.Where((Recipe arg) => arg.Id == id).FirstOrDefault();
+        //    _recipes.Remove(oldRecipe);
 
-            return Task.FromResult(true);
-        }
+        //    return Task.FromResult(true);
+        //}
 
         public Task<Recipe> GetRecipeAsync(int id)
         {
             return Task.FromResult(_recipes.FirstOrDefault(s => s.Id == id));
         }
 
-        public Task<IEnumerable<Recipe>> GetRecipeAsync(bool forceRefresh = false)
+        public Task<IEnumerable<Recipe>> GetAllRecipesAsync(bool forceRefresh = false)
         {
             return Task.FromResult(_recipes.AsEnumerable());
         }

@@ -29,41 +29,41 @@ namespace RexipeMobile.Services
 
         bool IsConnected => Connectivity.NetworkAccess == NetworkAccess.Internet;
 
-        public async Task<bool> AddRecipeAsync(Recipe recipe)
-        {
-            if (recipe == null || !IsConnected)
-                return false;
+        //public async Task<bool> AddRecipeAsync(Recipe recipe)
+        //{
+        //    if (recipe == null || !IsConnected)
+        //        return false;
 
-            var serializedRecipe = JsonConvert.SerializeObject(recipe);
+        //    var serializedRecipe = JsonConvert.SerializeObject(recipe);
 
-            var response = await client.PostAsync($"api/recipe", new StringContent(serializedRecipe, Encoding.UTF8, "application/json"));
+        //    var response = await client.PostAsync($"api/recipe", new StringContent(serializedRecipe, Encoding.UTF8, "application/json"));
 
-            return response.IsSuccessStatusCode;
-        }
+        //    return response.IsSuccessStatusCode;
+        //}
 
-        public async Task<bool> UpdateRecipeAsync(Recipe recipe)
-        {
-            if (recipe == null || !IsConnected)
-                return false;
+        //public async Task<bool> UpdateRecipeAsync(Recipe recipe)
+        //{
+        //    if (recipe == null || !IsConnected)
+        //        return false;
 
-            var serializedRecipe = JsonConvert.SerializeObject(recipe);
-            var buffer = Encoding.UTF8.GetBytes(serializedRecipe);
-            var byteContent = new ByteArrayContent(buffer);
+        //    var serializedRecipe = JsonConvert.SerializeObject(recipe);
+        //    var buffer = Encoding.UTF8.GetBytes(serializedRecipe);
+        //    var byteContent = new ByteArrayContent(buffer);
 
-            var response = await client.PutAsync(new Uri($"api/recipe/{recipe.Id}"), byteContent);
+        //    var response = await client.PutAsync(new Uri($"api/recipe/{recipe.Id}"), byteContent);
 
-            return response.IsSuccessStatusCode;
-        }
+        //    return response.IsSuccessStatusCode;
+        //}
 
-        public async Task<bool> DeleteRecipeAsync(int id)
-        {
-            if (!IsConnected)
-                return false;
+        //public async Task<bool> DeleteRecipeAsync(int id)
+        //{
+        //    if (!IsConnected)
+        //        return false;
 
-            var response = await client.DeleteAsync($"api/recipe/{id}");
+        //    var response = await client.DeleteAsync($"api/recipe/{id}");
 
-            return response.IsSuccessStatusCode;
-        }
+        //    return response.IsSuccessStatusCode;
+        //}
 
         public async Task<Recipe> GetRecipeAsync(int id)
         {
@@ -76,11 +76,11 @@ namespace RexipeMobile.Services
             return null;
         }
 
-        public async Task<IEnumerable<Recipe>> GetRecipeAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<Recipe>> GetAllRecipesAsync(bool forceRefresh = false)
         {
             if (forceRefresh && IsConnected)
             {
-                var json = await client.GetStringAsync($"api/recipe");
+                var json = await client.GetStringAsync($"api/recipe/all");
                 _recipes = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<Recipe>>(json));
             }
 

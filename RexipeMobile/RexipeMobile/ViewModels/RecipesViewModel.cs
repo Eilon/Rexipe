@@ -24,23 +24,26 @@ namespace RexipeMobile.ViewModels
 
             MessagingCenter.Subscribe<NewRecipePage, Recipe>(this, "AddRecipe", async (obj, recipe) =>
             {
-                var newRecipe = recipe as Recipe;
-                Recipes.Add(newRecipe);
-                await DataStore.AddRecipeAsync(newRecipe);
+                await Task.Delay(0);
+                //var newRecipe = recipe as Recipe;
+                //Recipes.Add(newRecipe);
+                //await DataStore.AddRecipeAsync(newRecipe);
             });
         }
 
         async Task ExecuteLoadRecipesCommand()
         {
             if (IsBusy)
+            {
                 return;
+            }
 
             IsBusy = true;
 
             try
             {
                 Recipes.Clear();
-                var recipes = await DataStore.GetRecipeAsync(true);
+                var recipes = await DataStore.GetAllRecipesAsync(true);
                 foreach (var recipe in recipes)
                 {
                     Recipes.Add(recipe);
