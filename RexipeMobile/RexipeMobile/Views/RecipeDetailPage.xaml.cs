@@ -14,13 +14,13 @@ namespace RexipeMobile.Views
     [DesignTimeVisible(false)]
     public partial class RecipeDetailPage : ContentPage
     {
-        RecipeDetailViewModel viewModel;
+        RecipeDetailViewModel _viewModel;
 
         public RecipeDetailPage(RecipeDetailViewModel viewModel)
         {
             InitializeComponent();
 
-            BindingContext = this.viewModel = viewModel;
+            BindingContext = _viewModel = viewModel;
         }
 
         public RecipeDetailPage()
@@ -29,11 +29,12 @@ namespace RexipeMobile.Views
 
             var item = new Recipe
             {
+                // TODO: Is it necessary to set anything here?
                 Title = "Is this used???",
             };
 
-            viewModel = new RecipeDetailViewModel(item);
-            BindingContext = viewModel;
+            _viewModel = new RecipeDetailViewModel(item);
+            BindingContext = _viewModel;
         }
     }
 }
