@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using RexipeModels;
@@ -13,13 +10,12 @@ namespace RexipeMobile.Services
 {
     public class HttpRecipeStore : IRecipeStore
     {
-        HttpClient client;
-
-        IEnumerable<Recipe> _recipes;
+        private readonly HttpClient _httpClient;
+        private IEnumerable<Recipe> _recipes;
 
         public HttpRecipeStore()
         {
-            client = new HttpClient
+            _httpClient = new HttpClient
             {
                 BaseAddress = new Uri($"{App.AzureBackendUrl}/")
             };
@@ -65,11 +61,11 @@ namespace RexipeMobile.Services
         //    return response.IsSuccessStatusCode;
         //}
 
-        public async Task<Recipe> GetRecipeAsync(int id)
+        public async Task<Recipe> GetRecipeAsync(int recipeId)
         {
             if (IsConnected)
             {
-                var json = await client.GetStringAsync($"api/recipe/{id}");
+                var json = await _httpClient.GetStringAsync($"api/recipe/{recipeId}");
                 return await Task.Run(() => JsonConvert.DeserializeObject<Recipe>(json));
             }
 
@@ -80,11 +76,33 @@ namespace RexipeMobile.Services
         {
             if (forceRefresh && IsConnected)
             {
-                var json = await client.GetStringAsync($"api/recipe/all");
+                var json = await _httpClient.GetStringAsync($"api/recipe/all");
                 _recipes = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<Recipe>>(json));
             }
 
             return _recipes;
+        }
+
+        public async Task<IEnumerable<IngredientQuantity>> GetRecipeIngredients(int recipeId)
+        {
+            if (IsConnected)
+            {
+                var json = await _httpClient.GetStringAsync($"api/recipe/{recipeId}/ingredients");
+                return await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<IngredientQuantity>>(json));
+            }
+
+            return null;
+        }
+
+        public async Task<IEnumerable<RecipeDirection>> GetRecipeDirections(int recipeId)
+        {
+            if (IsConnected)
+            {
+                var json = await _httpClient.GetStringAsync($"api/recipe/{recipeId}/directions");
+                return await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<RecipeDirection>>(json));
+            }
+
+            return null;
         }
     }
 }

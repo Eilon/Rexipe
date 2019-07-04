@@ -11,21 +11,23 @@ namespace RexipeMobile.Views
     [DesignTimeVisible(false)]
     public partial class RecipesPage : ContentPage
     {
-        readonly RecipesViewModel viewModel;
+        private readonly RecipesViewModel _viewModel;
 
         public RecipesPage()
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new RecipesViewModel();
+            BindingContext = _viewModel = new RecipesViewModel();
         }
 
         async void OnRecipeSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            if (!(args.SelectedItem is Recipe item))
+            if (!(args.SelectedItem is Recipe recipe))
+            {
                 return;
+            }
 
-            await Navigation.PushAsync(new RecipeDetailPage(new RecipeDetailViewModel(item)));
+            await Navigation.PushAsync(new RecipeDetailPage(new RecipeDetailViewModel(recipe)));
 
             // Manually deselect item.
             RecipesListView.SelectedItem = null;
@@ -40,8 +42,10 @@ namespace RexipeMobile.Views
         {
             base.OnAppearing();
 
-            if (viewModel.Recipes.Count == 0)
-                viewModel.LoadRecipesCommand.Execute(null);
+            if (_viewModel.Recipes.Count == 0)
+            {
+                _viewModel.LoadRecipesCommand.Execute(null);
+            }
         }
     }
 }

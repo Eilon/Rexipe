@@ -10,7 +10,7 @@ namespace RexipeMobile.Views
     [DesignTimeVisible(false)]
     public partial class RecipeDetailPage : ContentPage
     {
-        RecipeDetailViewModel _viewModel;
+        private readonly RecipeDetailViewModel _viewModel;
 
         public RecipeDetailPage(RecipeDetailViewModel viewModel)
         {
@@ -31,6 +31,16 @@ namespace RexipeMobile.Views
 
             _viewModel = new RecipeDetailViewModel(item);
             BindingContext = _viewModel;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (_viewModel.Ingredients == null)
+            {
+                _viewModel.LoadRecipeDetailsCommand.Execute(null);
+            }
         }
     }
 }

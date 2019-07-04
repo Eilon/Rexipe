@@ -11,7 +11,7 @@ namespace RexipeMobile.ViewModels
 {
     public class RecipesViewModel : BaseViewModel
     {
-        public IRecipeStore DataStore { get; } = DependencyService.Get<IRecipeStore>();
+        private IRecipeStore DataStore { get; } = DependencyService.Get<IRecipeStore>();
 
         public ObservableCollection<Recipe> Recipes { get; set; }
         public Command LoadRecipesCommand { get; set; }
