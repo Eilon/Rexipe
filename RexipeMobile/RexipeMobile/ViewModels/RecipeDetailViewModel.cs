@@ -33,6 +33,9 @@ namespace RexipeMobile.ViewModels
         public bool HasIngredients => Ingredients?.Any() ?? false;
         public bool NotHasIngredients => !HasIngredients;
 
+        public bool HasDirections => Directions?.Any() ?? false;
+        public bool NotHasDirections => !HasDirections;
+
         private async Task ExecuteLoadRecipeDetailsCommand()
         {
             if (IsBusy)

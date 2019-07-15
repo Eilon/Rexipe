@@ -23,7 +23,7 @@
             <Label Text="{Binding Recipe, Converter={StaticResource recipeServingsConverter}}" d:Text="Min servings" FontSize="Small"/>
 
             <Label Text="Ingredients:" FontSize="Medium" />
-            <StackLayout BindableLayout.ItemsSource="{Binding Recipe.Ingredients}"  IsVisible="{Binding HasIngredients}">
+            <StackLayout BindableLayout.ItemsSource="{Binding Recipe.Ingredients}" IsVisible="{Binding HasIngredients}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Orientation="Horizontal"  Padding="10">
@@ -31,16 +31,16 @@
                                     d:Text="{Binding .}"
                                     FontSize="16" />
                             <Label Text="{Binding Ingredient.Name}"
-                                    d:Text="Servings"
+                                    d:Text="Some Ingredient"
                                     FontSize="14" />
                         </StackLayout>
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </StackLayout>
-            <Label  IsVisible="{Binding NotHasIngredients}" Text="Sorry, no ingredients!"></Label>
+            <Label IsVisible="{Binding NotHasIngredients}" Text="Sorry, no ingredients!"></Label>
 
             <Label Text="Directions:" FontSize="Medium" />
-            <StackLayout BindableLayout.ItemsSource="{Binding Recipe.Directions}">
+            <StackLayout BindableLayout.ItemsSource="{Binding Recipe.Directions}" IsVisible="{Binding HasDirections}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Orientation="Horizontal"  Padding="10">
@@ -51,6 +51,7 @@
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </StackLayout>
+            <Label IsVisible="{Binding NotHasDirections}" Text="Sorry, no directions!"></Label>
 
         </StackLayout>
     </ScrollView>
