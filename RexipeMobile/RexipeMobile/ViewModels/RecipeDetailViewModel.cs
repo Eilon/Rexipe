@@ -11,6 +11,9 @@ namespace RexipeMobile.ViewModels
 {
     public class RecipeDetailViewModel : BaseViewModel
     {
+        private List<IngredientQuantity> _ingredients;
+        private List<RecipeDirection> _directions;
+
         private IRecipeStore DataStore { get; } = DependencyService.Get<IRecipeStore>();
         public Command LoadRecipeDetailsCommand { get; set; }
 
@@ -27,8 +30,29 @@ namespace RexipeMobile.ViewModels
         /// </summary>
         public Recipe Recipe { get; }
 
-        public List<IngredientQuantity> Ingredients { get; set; }
-        public List<RecipeDirection> Directions { get; set; }
+        public List<IngredientQuantity> Ingredients
+        {
+            get => _ingredients;
+            set
+            {
+                _ingredients = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(HasIngredients));
+                OnPropertyChanged(nameof(NotHasIngredients));
+            }
+        }
+
+        public List<RecipeDirection> Directions
+        {
+            get => _directions;
+            set
+            {
+                _directions = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(HasDirections));
+                OnPropertyChanged(nameof(NotHasDirections));
+            }
+        }
 
         public bool HasIngredients => Ingredients?.Any() ?? false;
         public bool NotHasIngredients => !HasIngredients;
