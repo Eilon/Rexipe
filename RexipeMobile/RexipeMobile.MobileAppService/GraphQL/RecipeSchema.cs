@@ -45,8 +45,16 @@ namespace RexipeMobile.MobileAppService.GraphQL
             Field(x => x.Title).Description("The title of the recipe.");
             Field(x => x.ServingsMin).Description("The minimum servings this recipe will produce.");
             Field(x => x.ServingsMax).Description("The maximum servings this recipe will produce.");
+            // Tips
+            // Images
+            // NutritionInfo
+            Field(x => x.PrepTime).Description("The time required to do the prep work for the recipe. This is typically active time.");
+            Field(x => x.CookTime).Description("The time required to cook the recipe. This is typically passive time.");
+            Field(x => x.ReadyTime).Description("The time from start to end for the recipe to be ready.");
 
+            // Author
             FieldAsync<ListGraphType<IngredientQuantityType>>("ingredients", resolve: async context => await recipeRepo.GetRecipeIngredients(context.Source.Id));
+            FieldAsync<ListGraphType<RecipeDirectionType>>("directions", resolve: async context => await recipeRepo.GetRecipeDirections(context.Source.Id));
         }
     }
 
@@ -88,6 +96,16 @@ namespace RexipeMobile.MobileAppService.GraphQL
     {
         public IngredientUnitType()
         {
+        }
+    }
+
+    public class RecipeDirectionType : ObjectGraphType<RecipeDirection>
+    {
+        public RecipeDirectionType()
+        {
+            Field(x => x.Id, type: typeof(IdGraphType));
+
+            Field(x => x.Direction).Description("The direction.");
         }
     }
 }
