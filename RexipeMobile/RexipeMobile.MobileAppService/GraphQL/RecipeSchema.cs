@@ -46,7 +46,7 @@ namespace RexipeMobile.MobileAppService.GraphQL
             Field(x => x.ServingsMin).Description("The minimum servings this recipe will produce.");
             Field(x => x.ServingsMax).Description("The maximum servings this recipe will produce.");
 
-            Field<ListGraphType<IngredientQuantityType>>("ingredients", resolve: context => recipeRepo.GetRecipeIngredients(context.Source.Id));
+            FieldAsync<ListGraphType<IngredientQuantityType>>("ingredients", resolve: async context => await recipeRepo.GetRecipeIngredients(context.Source.Id));
         }
     }
 
@@ -88,8 +88,6 @@ namespace RexipeMobile.MobileAppService.GraphQL
     {
         public IngredientUnitType()
         {
-            //Name = "";
-            //Desc
         }
     }
 }
