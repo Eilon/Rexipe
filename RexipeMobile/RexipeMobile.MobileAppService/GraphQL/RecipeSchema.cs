@@ -24,13 +24,13 @@ namespace RexipeMobile.MobileAppService.GraphQL
 
             Field<ListGraphType<RecipeType>>("recipes", resolve: context => recipeRepo.GetAll(), description: "Recipes in the database.");
 
-            Field<RecipeType>(
+            FieldAsync<RecipeType>(
                 "recipe",
                 arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "recipeId" }),
-                resolve: context =>
+                resolve: async context =>
                 {
                     var id = context.GetArgument<int>("recipeId");
-                    return recipeRepo.GetRecipeDetails(id);
+                    return await recipeRepo.GetRecipe(id);
                 }
             );
         }
