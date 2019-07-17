@@ -13,40 +13,56 @@
             Padding="15"
             VerticalOptions="FillAndExpand">
 
-            <Label Text="Title:" FontSize="Medium" />
-            <Label Text="{Binding Recipe.Title}" d:Text="Title" FontSize="Small"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
 
-            <Label Text="Ready in:" FontSize="Medium" />
-            <Label Text="{Binding Recipe.ReadyTime, Converter={StaticResource timeSpanConverter}}" d:Text="1hr 15min" FontSize="Small"/>
+                <Label Grid.Row="0" Grid.Column="0" Text="Prep time:" FontSize="Small" />
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Recipe.PrepTime, Converter={StaticResource timeSpanConverter}}" d:Text="30min" FontSize="Small"/>
 
-            <Label Text="Servings:" FontSize="Medium" />
-            <Label Text="{Binding Recipe, Converter={StaticResource recipeServingsConverter}}" d:Text="Min servings" FontSize="Small"/>
+                <Label Grid.Row="1" Grid.Column="0" Text="Cook time:" FontSize="Small" />
+                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Recipe.CookTime, Converter={StaticResource timeSpanConverter}}" d:Text="1hr 15min" FontSize="Small"/>
 
-            <Label Text="Ingredients:" FontSize="Medium" />
+                <Label Grid.Row="2" Grid.Column="0" Text="Ready in:" FontSize="Small" />
+                <Label Grid.Row="2" Grid.Column="1" Text="{Binding Recipe.ReadyTime, Converter={StaticResource timeSpanConverter}}" d:Text="2hr" FontSize="Small"/>
+
+                <Label Grid.Row="3" Grid.Column="0" Text="Servings:" FontSize="Small" />
+                <Label Grid.Row="3" Grid.Column="1" Text="{Binding Recipe, Converter={StaticResource recipeServingsConverter}}" d:Text="4 - 6" FontSize="Small"/>
+            </Grid>
+
+            <Label Text="Ingredients:" FontSize="Small" />
             <StackLayout BindableLayout.ItemsSource="{Binding Ingredients}" IsVisible="{Binding HasIngredients}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Orientation="Horizontal"  Padding="10">
-                            <Label Text="{Binding Quantity}"
+                            <Label Text="{Binding Quantity, Converter={StaticResource itemQuantityConverter}}}"
                                     d:Text="{Binding .}"
-                                    FontSize="16" />
+                                    FontSize="Small" />
                             <Label Text="{Binding Ingredient.Name}"
                                     d:Text="Some Ingredient"
-                                    FontSize="14" />
+                                    FontSize="Small" />
                         </StackLayout>
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </StackLayout>
             <Label IsVisible="{Binding NotHasIngredients}" Text="Sorry, no ingredients!"></Label>
 
-            <Label Text="Directions:" FontSize="Medium" />
+            <Label Text="Directions:" FontSize="Small" />
             <StackLayout BindableLayout.ItemsSource="{Binding Directions}" IsVisible="{Binding HasDirections}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Orientation="Horizontal"  Padding="10">
                             <Label Text="{Binding Direction}"
                                     d:Text="{Binding .}"
-                                    FontSize="16" />
+                                    FontSize="Small" />
                         </StackLayout>
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>

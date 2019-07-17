@@ -9,6 +9,7 @@
     <Application.Resources>
         <cvt:RecipeServingsConverter x:Key="recipeServingsConverter" />
         <cvt:TimeSpanConverter x:Key="timeSpanConverter" />
+        <cvt:ItemQuantityConverter x:Key="itemQuantityConverter" />
     </Application.Resources>
 </Application>
     
