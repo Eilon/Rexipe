@@ -29,9 +29,9 @@ namespace RexipeMobile.Controllers
         [HttpGet("{recipeId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<Recipe>> GetRecipeDetails(int recipeId)
+        public async Task<ActionResult<Recipe>> GetRecipe(int recipeId)
         {
-            var recipe = await _recipeRepository.GetRecipeDetails(recipeId);
+            var recipe = await _recipeRepository.GetRecipe(recipeId);
 
             if (recipe == null)
             {

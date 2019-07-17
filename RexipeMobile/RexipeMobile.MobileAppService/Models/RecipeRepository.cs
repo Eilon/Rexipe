@@ -31,7 +31,7 @@ namespace RexipeMobile.Models
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<Recipe> GetRecipeDetails(int id)
+        public async Task<Recipe> GetRecipe(int id)
         {
             var recipes = await RexipeDb.Recipes
                 .Where(r => r.Id == id)
