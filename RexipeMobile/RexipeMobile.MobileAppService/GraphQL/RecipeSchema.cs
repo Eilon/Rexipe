@@ -64,6 +64,7 @@ namespace RexipeMobile.MobileAppService.GraphQL
         {
             Field(x => x.Id, type: typeof(IdGraphType));
 
+            Field(x => x.Order);
             Field(x => x.Ingredient, type: typeof(IngredientType)).Description("The ingredient.");
             Field(x => x.Quantity, type: typeof(ItemQuantityType)).Description("The quantity of the ingredient.");
         }
@@ -105,6 +106,7 @@ namespace RexipeMobile.MobileAppService.GraphQL
         {
             Field(x => x.Id, type: typeof(IdGraphType));
 
+            Field(x => x.Order);
             Field(x => x.Direction).Description("The direction.");
         }
     }

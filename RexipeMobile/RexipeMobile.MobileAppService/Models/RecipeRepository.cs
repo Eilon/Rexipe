@@ -59,7 +59,9 @@ namespace RexipeMobile.Models
                 return null;
             }
 
-            return recipe.Ingredients.AsEnumerable();
+            return recipe.Ingredients
+                .OrderBy(i => i.Order)
+                .AsEnumerable();
         }
 
         /// <summary>
@@ -80,7 +82,9 @@ namespace RexipeMobile.Models
                 return null;
             }
 
-            return recipe.Directions.AsEnumerable();
+            return recipe.Directions
+                .OrderBy(d => d.Order)
+                .AsEnumerable();
         }
     }
 }

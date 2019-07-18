@@ -43,6 +43,7 @@ namespace RexipeModels
     public class RecipeTip
     {
         public int Id { get; set; }
+        public int? Order { get; set; }
         [Required]
         public string Text { get; set; }
         public Image Image { get; set; }
@@ -51,6 +52,7 @@ namespace RexipeModels
     public class RecipeDirection
     {
         public int Id { get; set; }
+        public int? Order { get; set; }
         [Required]
         public string Direction { get; set; }
         // TODO: Ingredient references
@@ -59,6 +61,7 @@ namespace RexipeModels
     public class IngredientQuantity
     {
         public int Id { get; set; }
+        public int? Order { get; set; }
         [Required]
         public Ingredient Ingredient { get; set; }
         public ItemQuantity Quantity { get; set; }

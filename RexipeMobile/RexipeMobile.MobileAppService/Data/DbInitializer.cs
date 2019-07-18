@@ -1,6 +1,5 @@
 ﻿using RexipeModels;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace RexipeMobile.MobileAppService.Data
@@ -17,7 +16,7 @@ namespace RexipeMobile.MobileAppService.Data
                 return;   // DB has been seeded
             }
 
-            var authors = new []
+            var authors = new[]
             {
                 new RecipeAuthor
                 {
@@ -96,25 +95,25 @@ namespace RexipeMobile.MobileAppService.Data
 
             var ingredientQuantities = new[]
             {
-                new IngredientQuantity { /*Id = 0,*/ Ingredient = ingredients[0], Quantity =quantities[0]  },
-                new IngredientQuantity { /*Id = 1,*/ Ingredient = ingredients[1], Quantity =  quantities[1]},
-                new IngredientQuantity { /*Id = 2,*/ Ingredient = ingredients[2], Quantity =  quantities[2]},
-                new IngredientQuantity { /*Id = 3,*/ Ingredient = ingredients[3], Quantity =  quantities[3]},
+                new IngredientQuantity { /*Id = 0,*/Order=0,  Ingredient = ingredients[0], Quantity =quantities[0]  },
+                new IngredientQuantity { /*Id = 1,*/Order=1,  Ingredient = ingredients[1], Quantity =  quantities[1]},
+                new IngredientQuantity { /*Id = 2,*/Order=2,  Ingredient = ingredients[2], Quantity =  quantities[2]},
+                new IngredientQuantity { /*Id = 3,*/Order=3,  Ingredient = ingredients[3], Quantity =  quantities[3]},
 
-                new IngredientQuantity{/*Id=4,*/ Ingredient = ingredients[4], Quantity =  quantities[4]},
-                new IngredientQuantity{/*Id=5,*/ Ingredient = ingredients[5], Quantity =  quantities[5]},
-                new IngredientQuantity{/*Id=6,*/ Ingredient = ingredients[6], Quantity =  quantities[6]},
+                new IngredientQuantity{/*Id=4,*/ Order=0, Ingredient = ingredients[4], Quantity =  quantities[4]},
+                new IngredientQuantity{/*Id=5,*/ Order=1, Ingredient = ingredients[5], Quantity =  quantities[5]},
+                new IngredientQuantity{/*Id=6,*/ Order=2, Ingredient = ingredients[6], Quantity =  quantities[6]},
 
-                new IngredientQuantity{/*Id=7,*/ Ingredient = ingredients[7], Quantity =  quantities[7]},
-                new IngredientQuantity{/*Id=8,*/ Ingredient = ingredients[8], Quantity = quantities[8]},
-                new IngredientQuantity{/*Id=9,*/ Ingredient = ingredients[9], Quantity = quantities[9]},
-                new IngredientQuantity{/*Id=10,*/ Ingredient = ingredients[10], Quantity = quantities[10]},
+                new IngredientQuantity{/*Id=7,*/ Order=0, Ingredient = ingredients[7], Quantity =  quantities[7]},
+                new IngredientQuantity{/*Id=8,*/ Order=1, Ingredient = ingredients[8], Quantity = quantities[8]},
+                new IngredientQuantity{/*Id=9,*/ Order=2, Ingredient = ingredients[9], Quantity = quantities[9]},
+                new IngredientQuantity{/*Id=10,*/Order=3,  Ingredient = ingredients[10], Quantity = quantities[10]},
 
-                new IngredientQuantity{/*Id=11,*/ Ingredient = ingredients[11], Quantity = quantities[11]},
-                new IngredientQuantity{/*Id=12,*/ Ingredient = ingredients[12], Quantity =  quantities[12]},
+                new IngredientQuantity{/*Id=11,*/ Order=0, Ingredient = ingredients[11], Quantity = quantities[11]},
+                new IngredientQuantity{/*Id=12,*/ Order=1, Ingredient = ingredients[12], Quantity =  quantities[12]},
 
-                new IngredientQuantity{/*Id=13,*/ Ingredient = ingredients[13], Quantity = quantities[13]},
-                new IngredientQuantity{/*Id=14,*/ Ingredient = ingredients[14], Quantity = quantities[14]},
+                new IngredientQuantity{/*Id=13,*/ Order=0, Ingredient = ingredients[13], Quantity = quantities[13]},
+                new IngredientQuantity{/*Id=14,*/ Order=1, Ingredient = ingredients[14], Quantity = quantities[14]},
             };
             foreach (var iq in ingredientQuantities)
             {
@@ -125,35 +124,35 @@ namespace RexipeMobile.MobileAppService.Data
 
             var directions = new[]
             {
-                new RecipeDirection{ /*Id=0,*/ Direction="Chop celery"},
-                new RecipeDirection{ /*Id=1,*/ Direction="Cut chicken into cubes"},
-                new RecipeDirection{ /*Id=2,*/ Direction="Chop potatoes into cubes"},
-                new RecipeDirection{ /*Id=3,*/ Direction="Mix everything"},
-                new RecipeDirection{ /*Id=4,*/ Direction="Pre-heat oven to 123 degrees"},
-                new RecipeDirection{ /*Id=5,*/ Direction="Cook for 2 1/2 hours"},
-                new RecipeDirection{ /*Id=6,*/ Direction="Remove from oven, let sit 15 minutes"},
+                new RecipeDirection{ /*Id=0,*/Order=0, Direction="Chop celery"},
+                new RecipeDirection{ /*Id=1,*/Order=1, Direction="Cut chicken into cubes"},
+                new RecipeDirection{ /*Id=2,*/Order=2, Direction="Chop potatoes into cubes"},
+                new RecipeDirection{ /*Id=3,*/Order=3, Direction="Mix everything"},
+                new RecipeDirection{ /*Id=4,*/Order=4, Direction="Pre-heat oven to 123 degrees"},
+                new RecipeDirection{ /*Id=5,*/Order=5, Direction="Cook for 2 1/2 hours"},
+                new RecipeDirection{ /*Id=6,*/Order=6, Direction="Remove from oven, let sit 15 minutes"},
 
-                new RecipeDirection{ /*Id=7,*/ Direction="Place layer of noodles in pan"},
-                new RecipeDirection{ /*Id=8,*/ Direction="Add 1/3 of sauce to pan"},
-                new RecipeDirection{ /*Id=9,*/ Direction="Add 1/3 of cheese to pan"},
-                new RecipeDirection{ /*Id=10,*/ Direction="Repeat for 3 total layers"},
-                new RecipeDirection{ /*Id=11,*/ Direction="Pre-heat oven to 123 degrees"},
-                new RecipeDirection{ /*Id=12,*/ Direction="Cook for 2 1/2 hours"},
-                new RecipeDirection{ /*Id=13,*/ Direction="Remove from oven, let sit 15 minutes"},
+                new RecipeDirection{ /*Id=7,*/ Order=0, Direction="Place layer of noodles in pan"},
+                new RecipeDirection{ /*Id=8,*/ Order=1, Direction="Add 1/3 of sauce to pan"},
+                new RecipeDirection{ /*Id=9,*/ Order=2, Direction="Add 1/3 of cheese to pan"},
+                new RecipeDirection{ /*Id=10,*/Order=3,  Direction="Repeat for 3 total layers"},
+                new RecipeDirection{ /*Id=11,*/Order=4,  Direction="Pre-heat oven to 123 degrees"},
+                new RecipeDirection{ /*Id=12,*/Order=5,  Direction="Cook for 2 1/2 hours"},
+                new RecipeDirection{ /*Id=13,*/Order=6,  Direction="Remove from oven, let sit 15 minutes"},
 
-                new RecipeDirection{ /*Id=14,*/ Direction="Chop apples"},
-                new RecipeDirection{ /*Id=15,*/ Direction="Mix everything in pie pan"},
-                new RecipeDirection{ /*Id=16,*/ Direction="Pre-heat oven to 123 degrees"},
-                new RecipeDirection{ /*Id=17,*/ Direction="Cook for 1 hour"},
-                new RecipeDirection{ /*Id=18,*/ Direction="Remove from oven, let sit 15 minutes"},
+                new RecipeDirection{ /*Id=14,*/Order=0, Direction="Chop apples"},
+                new RecipeDirection{ /*Id=15,*/Order=1, Direction="Mix everything in pie pan"},
+                new RecipeDirection{ /*Id=16,*/Order=2, Direction="Pre-heat oven to 123 degrees"},
+                new RecipeDirection{ /*Id=17,*/Order=3, Direction="Cook for 1 hour"},
+                new RecipeDirection{ /*Id=18,*/Order=4, Direction="Remove from oven, let sit 15 minutes"},
 
-                new RecipeDirection{ /*Id=19,*/ Direction="In clean cereal bowl add cereal of choice"},
-                new RecipeDirection{ /*Id=20,*/ Direction="Add milk to bowl"},
-                new RecipeDirection{ /*Id=21,*/ Direction="(Optional) Let sit for 1 minute for cereal to absorb milk"},
+                new RecipeDirection{ /*Id=19,*/Order=0, Direction="In clean cereal bowl add cereal of choice"},
+                new RecipeDirection{ /*Id=20,*/Order=1, Direction="Add milk to bowl"},
+                new RecipeDirection{ /*Id=21,*/Order=2, Direction="(Optional) Let sit for 1 minute for cereal to absorb milk"},
 
-                new RecipeDirection{ /*Id=22,*/ Direction="Add pre-made chili to slow cooker"},
-                new RecipeDirection{ /*Id=23,*/ Direction="Cook on low for 6 hours"},
-                new RecipeDirection{ /*Id=24,*/ Direction="Serve and sprinkle cheese as desired"},
+                new RecipeDirection{ /*Id=22,*/Order=0, Direction="Add pre-made chili to slow cooker"},
+                new RecipeDirection{ /*Id=23,*/Order=1, Direction="Cook on low for 6 hours"},
+                new RecipeDirection{ /*Id=24,*/Order=2, Direction="Serve and sprinkle cheese as desired"},
             };
             foreach (var d in directions)
             {
