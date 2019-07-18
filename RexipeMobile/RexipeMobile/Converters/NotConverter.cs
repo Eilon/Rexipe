@@ -1,20 +1,18 @@
 ﻿using System;
-using System.Collections;
 using System.Globalization;
 using Xamarin.Forms;
 
 namespace RexipeMobile.Converters
 {
-    public class IsCollectionNotEmptyConverter : IValueConverter
+    public class NotConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var collection = value as ICollection;
-            if (value == null)
+            if (!(value is bool))
             {
                 return null;
             }
-            return collection.Count != 0;
+            return !(bool)value;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

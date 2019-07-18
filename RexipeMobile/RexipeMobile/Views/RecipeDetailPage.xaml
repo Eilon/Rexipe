@@ -39,7 +39,7 @@
             </Grid>
 
             <Label Text="Ingredients:" FontSize="Small" />
-            <StackLayout BindableLayout.ItemsSource="{Binding Ingredients}" IsVisible="{Binding Ingredients, Converter={StaticResource isNotEmpty}}">
+            <StackLayout BindableLayout.ItemsSource="{Binding Ingredients}" IsVisible="{Binding IsIngredientsListVisible}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Orientation="Horizontal"  Padding="10">
@@ -53,10 +53,10 @@
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </StackLayout>
-            <Label IsVisible="{Binding Ingredients, Converter={StaticResource isEmpty}}" Text="Sorry, no ingredients!"></Label>
+            <Label IsVisible="{Binding IsIngredientsListVisible, Converter={StaticResource not}}" Text="Sorry, no ingredients!"></Label>
 
             <Label Text="Directions:" FontSize="Small" />
-            <StackLayout BindableLayout.ItemsSource="{Binding Directions}" IsVisible="{Binding Directions, Converter={StaticResource isNotEmpty}}">
+            <StackLayout BindableLayout.ItemsSource="{Binding Directions}" IsVisible="{Binding IsDirectionsListVisible}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Orientation="Horizontal"  Padding="10">
@@ -67,7 +67,7 @@
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </StackLayout>
-            <Label IsVisible="{Binding Directions, Converter={StaticResource isEmpty}}" Text="Sorry, no directions!"></Label>
+            <Label IsVisible="{Binding IsDirectionsListVisible, Converter={StaticResource not}}" Text="Sorry, no directions!"></Label>
 
         </StackLayout>
     </ScrollView>
