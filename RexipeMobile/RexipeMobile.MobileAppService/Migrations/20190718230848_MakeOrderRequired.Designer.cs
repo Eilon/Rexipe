@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RexipeMobile.MobileAppService.Data;
 
 namespace RexipeMobile.MobileAppService.Migrations
 {
     [DbContext(typeof(RexipeDbContext))]
-    partial class RexipeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190718230848_MakeOrderRequired")]
+    partial class MakeOrderRequired
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
