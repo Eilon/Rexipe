@@ -13,13 +13,12 @@ namespace RexipeMobile.ViewModels
     {
         private IRecipeStore DataStore { get; } = DependencyService.Get<IRecipeStore>();
 
-        public ObservableCollection<Recipe> Recipes { get; set; }
+        public ObservableCollection<Recipe> Recipes { get; } = new ObservableCollection<Recipe>();
         public Command LoadRecipesCommand { get; set; }
 
         public RecipesViewModel()
         {
             Title = "Browse";
-            Recipes = new ObservableCollection<Recipe>();
             LoadRecipesCommand = new Command(async () => await ExecuteLoadRecipesCommand());
 
             MessagingCenter.Subscribe<NewRecipePage, Recipe>(this, "AddRecipe", async (obj, recipe) =>

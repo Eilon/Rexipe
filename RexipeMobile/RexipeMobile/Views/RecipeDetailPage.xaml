@@ -39,11 +39,11 @@
             </Grid>
 
             <Label Text="Ingredients:" FontSize="Small" />
-            <StackLayout BindableLayout.ItemsSource="{Binding Ingredients}" IsVisible="{Binding HasIngredients}">
+            <StackLayout BindableLayout.ItemsSource="{Binding Ingredients}" IsVisible="{Binding Ingredients, Converter={StaticResource isNotEmpty}}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Orientation="Horizontal"  Padding="10">
-                            <Label Text="{Binding Quantity, Converter={StaticResource itemQuantityConverter}}}"
+                            <Label Text="{Binding Quantity, Converter={StaticResource itemQuantityConverter}}"
                                     d:Text="{Binding .}"
                                     FontSize="Small" />
                             <Label Text="{Binding Ingredient.Name}"
@@ -53,10 +53,10 @@
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </StackLayout>
-            <Label IsVisible="{Binding NotHasIngredients}" Text="Sorry, no ingredients!"></Label>
+            <Label IsVisible="{Binding Ingredients, Converter={StaticResource isEmpty}}" Text="Sorry, no ingredients!"></Label>
 
             <Label Text="Directions:" FontSize="Small" />
-            <StackLayout BindableLayout.ItemsSource="{Binding Directions}" IsVisible="{Binding HasDirections}">
+            <StackLayout BindableLayout.ItemsSource="{Binding Directions}" IsVisible="{Binding Directions, Converter={StaticResource isNotEmpty}}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Orientation="Horizontal"  Padding="10">
@@ -67,7 +67,7 @@
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </StackLayout>
-            <Label IsVisible="{Binding NotHasDirections}" Text="Sorry, no directions!"></Label>
+            <Label IsVisible="{Binding Directions, Converter={StaticResource isEmpty}}" Text="Sorry, no directions!"></Label>
 
         </StackLayout>
     </ScrollView>

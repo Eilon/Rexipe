@@ -1,7 +1,7 @@
 ﻿using RexipeMobile.Services;
 using RexipeModels;
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,9 +11,6 @@ namespace RexipeMobile.ViewModels
 {
     public class RecipeDetailViewModel : BaseViewModel
     {
-        private List<IngredientQuantity> _ingredients;
-        private List<RecipeDirection> _directions;
-
         private IRecipeStore DataStore { get; } = DependencyService.Get<IRecipeStore>();
         public Command LoadRecipeDetailsCommand { get; set; }
 
@@ -30,35 +27,10 @@ namespace RexipeMobile.ViewModels
         /// </summary>
         public Recipe Recipe { get; }
 
-        public List<IngredientQuantity> Ingredients
-        {
-            get => _ingredients;
-            set
-            {
-                _ingredients = value;
-                OnPropertyChanged();
-                OnPropertyChanged(nameof(HasIngredients));
-                OnPropertyChanged(nameof(NotHasIngredients));
-            }
-        }
+        public ObservableCollection<IngredientQuantity> Ingredients { get; } = new ObservableCollection<IngredientQuantity>();
 
-        public List<RecipeDirection> Directions
-        {
-            get => _directions;
-            set
-            {
-                _directions = value;
-                OnPropertyChanged();
-                OnPropertyChanged(nameof(HasDirections));
-                OnPropertyChanged(nameof(NotHasDirections));
-            }
-        }
-
-        public bool HasIngredients => Ingredients?.Any() ?? false;
-        public bool NotHasIngredients => !HasIngredients;
-
-        public bool HasDirections => Directions?.Any() ?? false;
-        public bool NotHasDirections => !HasDirections;
+        public ObservableCollection<RecipeDirection> Directions { get; } = new ObservableCollection<RecipeDirection>();
+        public bool Loaded { get; private set; }
 
         private async Task ExecuteLoadRecipeDetailsCommand()
         {
@@ -71,8 +43,23 @@ namespace RexipeMobile.ViewModels
 
             try
             {
-                Ingredients = (await DataStore.GetRecipeIngredients(Recipe.Id)).ToList();
-                Directions = (await DataStore.GetRecipeDirections(Recipe.Id)).ToList();
+                Ingredients.Clear();
+                var ingredients = (await DataStore.GetRecipeIngredients(Recipe.Id)).ToList();
+                foreach (var ingredient in ingredients)
+                {
+                    Ingredients.Add(ingredient);
+                }
+                OnPropertyChanged("Ingredients");
+
+                Directions.Clear();
+                var directions = (await DataStore.GetRecipeDirections(Recipe.Id)).ToList();
+                foreach (var direction in directions)
+                {
+                    Directions.Add(direction);
+                }
+                OnPropertyChanged("Directions");
+
+                Loaded = true;
             }
             catch (Exception ex)
             {

@@ -37,7 +37,7 @@ namespace RexipeMobile.Views
         {
             base.OnAppearing();
 
-            if (_viewModel.Ingredients == null)
+            if (!_viewModel.Loaded)
             {
                 _viewModel.LoadRecipeDetailsCommand.Execute(null);
             }

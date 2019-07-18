@@ -10,6 +10,8 @@
         <cvt:RecipeServingsConverter x:Key="recipeServingsConverter" />
         <cvt:TimeSpanConverter x:Key="timeSpanConverter" />
         <cvt:ItemQuantityConverter x:Key="itemQuantityConverter" />
+        <cvt:IsCollectionEmptyConverter x:Key="isEmpty" />
+        <cvt:IsCollectionNotEmptyConverter x:Key="isNotEmpty" />
     </Application.Resources>
 </Application>
     
