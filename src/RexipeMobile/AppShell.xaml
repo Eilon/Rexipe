@@ -6,7 +6,8 @@
        mc:Ignorable="d"
        xmlns:local="clr-namespace:RexipeMobile.Views"
        Title="RexipeMobile"
-       x:Class="RexipeMobile.AppShell">
+       x:Class="RexipeMobile.AppShell"
+       FlyoutHeaderBehavior="Scroll">
 
     <Shell.Resources>
         <ResourceDictionary>
@@ -27,22 +28,20 @@
     </Shell.Resources>
 
     <FlyoutItem Title="Recipes">
-        <Tab Title="My Recipes" Icon="tab_feed.png">
+        <Tab Title="All" Icon="tab_recipes.png">
             <ShellContent ContentTemplate="{DataTemplate local:RecipesPage}" />
         </Tab>
-        <Tab Title="Favorite Recipes" Icon="tab_feed.png">
-          <ShellContent>
-            <ContentPage>
-              <Label Text="Favorites go here!"></Label>
-            </ContentPage>
-          </ShellContent>
+        <Tab Title="Favorites" Icon="tab_recipes_fav.png">
+            <ShellContent>
+                <ContentPage>
+                    <Label Text="Favorites go here!"></Label>
+                </ContentPage>
+            </ShellContent>
         </Tab>
-        <Tab Title="All Recipes" Icon="tab_feed.png">
-          <ShellContent>
-            <ContentPage>
-              <Label Text="More stuff goes here!"></Label>
-            </ContentPage>
-          </ShellContent>
+    </FlyoutItem>
+    <FlyoutItem Title="Shopping">
+        <Tab Title="Shopping" Icon="tab_shopping.png">
+            <ShellContent ContentTemplate="{DataTemplate local:ShoppingPage}" />
         </Tab>
     </FlyoutItem>
     <FlyoutItem Title="About">
@@ -54,7 +53,8 @@
     <Shell.FlyoutHeaderTemplate>
         <DataTemplate>
             <Grid>
-                <Label Text="Header here!!!"></Label>
+                <Image Aspect="AspectFill" Source="rexipe_header.png" Opacity="0.6" />
+                <Label Text="Rexipe"></Label>
             </Grid>
         </DataTemplate>
     </Shell.FlyoutHeaderTemplate>
@@ -66,7 +66,7 @@
                     <ColumnDefinition Width="0.2*" />
                     <ColumnDefinition Width="0.8*" />
                 </Grid.ColumnDefinitions>
-                <Image Source="{Binding FlyoutIcon}"
+                <Image Source="{Binding Icon}"
                        Margin="5"
                        HeightRequest="45" />
                 <Label Grid.Column="1"
@@ -79,11 +79,19 @@
 
     <Shell.MenuItemTemplate>
         <DataTemplate>
-            <ContentView>
-                <Image Source="{Binding Icon}"></Image>
-                <Label Text="---"></Label>
-                <Label Text="{Binding Text}"></Label>
-            </ContentView>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*" />
+                    <ColumnDefinition Width="0.8*" />
+                </Grid.ColumnDefinitions>
+                <Image Source="{Binding Icon}"
+                       Margin="5"
+                       HeightRequest="45" />
+                <Label Grid.Column="1"
+                       Text="{Binding Text}"
+                       FontAttributes="Italic"
+                       VerticalTextAlignment="Center" />
+            </Grid>
         </DataTemplate>
     </Shell.MenuItemTemplate>
 
