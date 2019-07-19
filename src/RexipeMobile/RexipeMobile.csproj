@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\RexipeModels\RexipeModels.csproj" />
+    <ProjectReference Include="..\RexipeModels\RexipeModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>
