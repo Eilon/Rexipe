@@ -159,30 +159,6 @@ namespace RexipeMobile.Services
             }
         }
 
-        //public Task<bool> AddRecipeAsync(Recipe recipe)
-        //{
-        //    _recipes.Add(recipe);
-
-        //    return Task.FromResult(true);
-        //}
-
-        //public Task<bool> UpdateRecipeAsync(Recipe recipe)
-        //{
-        //    var oldRecipe = _recipes.Where((Recipe arg) => arg.Id == recipe.Id).FirstOrDefault();
-        //    _recipes.Remove(oldRecipe);
-        //    _recipes.Add(recipe);
-
-        //    return Task.FromResult(true);
-        //}
-
-        //public Task<bool> DeleteRecipeAsync(int id)
-        //{
-        //    var oldRecipe = _recipes.Where((Recipe arg) => arg.Id == id).FirstOrDefault();
-        //    _recipes.Remove(oldRecipe);
-
-        //    return Task.FromResult(true);
-        //}
-
         public Task<Recipe> GetRecipeAsync(int recipeId)
         {
             return Task.FromResult(_recipes.FirstOrDefault(s => s.Id == recipeId));
