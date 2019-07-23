@@ -14,6 +14,11 @@ namespace RexipeMobile
 
         public static bool UseMockDataStore = false;
 
+        /// <summary>
+        /// Whether to use GraphQL or REST APIs to get server data.
+        /// </summary>
+        public static bool UseGraphQL = true;
+
         public App()
         {
             InitializeComponent();

@@ -70,16 +70,16 @@ namespace RexipeMobile.ViewModels
 
             try
             {
+                var recipeDetails = await DataStore.GetRecipeDetailsAsync(Recipe.Id);
+
                 Ingredients.Clear();
-                var ingredients = (await DataStore.GetRecipeIngredients(Recipe.Id)).ToList();
-                foreach (var ingredient in ingredients)
+                foreach (var ingredient in recipeDetails.Value.Item1)
                 {
                     Ingredients.Add(ingredient);
                 }
 
                 Directions.Clear();
-                var directions = (await DataStore.GetRecipeDirections(Recipe.Id)).ToList();
-                foreach (var direction in directions)
+                foreach (var direction in recipeDetails.Value.Item2)
                 {
                     Directions.Add(direction);
                 }

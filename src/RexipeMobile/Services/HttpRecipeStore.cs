@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Net.Http;
 using System.Threading.Tasks;
+using GraphQL.Client;
+using GraphQL.Common.Request;
 using Newtonsoft.Json;
 using RexipeModels;
 using Xamarin.Essentials;
@@ -83,23 +86,53 @@ namespace RexipeMobile.Services
             return _recipes;
         }
 
-        public async Task<IEnumerable<IngredientQuantity>> GetRecipeIngredients(int recipeId)
+        public async Task<(IEnumerable<IngredientQuantity>, IEnumerable<RecipeDirection>)?> GetRecipeDetailsAsync(int recipeId)
         {
             if (IsConnected)
             {
-                var json = await _httpClient.GetStringAsync($"api/recipe/{recipeId}/ingredients");
-                return await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<IngredientQuantity>>(json));
-            }
+                if (App.UseGraphQL)
+                {
+                    var recipeGraphQLRequest = new GraphQLRequest
+                    {
+                        Query = string.Format(CultureInfo.InvariantCulture, @"
+{{
+  recipe(recipeId: {0}) {{
+    ingredients {{
+      ingredient {{
+        name
+      }}
+      quantity {{
+        numerator
+        denominator
+        otherUnit
+        unit
+      }}
+    }}
+    directions
+    {{
+      direction
+    }}
+  }}
+}}
+                ", recipeId),
+                    };
 
-            return null;
-        }
+                    var graphQLClient = new GraphQLClient(App.AzureBackendUrl + "/graphql");
+                    var graphQLResponse = await graphQLClient.PostAsync(recipeGraphQLRequest);
+                    var recipeWithDetails = graphQLResponse.GetDataFieldAs<Recipe>("recipe");
 
-        public async Task<IEnumerable<RecipeDirection>> GetRecipeDirections(int recipeId)
-        {
-            if (IsConnected)
-            {
-                var json = await _httpClient.GetStringAsync($"api/recipe/{recipeId}/directions");
-                return await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<RecipeDirection>>(json));
+                    return (recipeWithDetails.Ingredients, recipeWithDetails.Directions);
+                }
+                else
+                {
+                    var ingredientsJson = await _httpClient.GetStringAsync($"api/recipe/{recipeId}/ingredients");
+                    var ingredients = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<IngredientQuantity>>(ingredientsJson));
+
+                    var directionsJson = await _httpClient.GetStringAsync($"api/recipe/{recipeId}/directions");
+                    var directions = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<RecipeDirection>>(directionsJson));
+
+                    return (ingredients, directions);
+                }
             }
 
             return null;

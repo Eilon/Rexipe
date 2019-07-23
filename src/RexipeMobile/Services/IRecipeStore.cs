@@ -8,7 +8,6 @@ namespace RexipeMobile.Services
     {
         Task<IEnumerable<Recipe>> GetAllRecipesAsync(bool forceRefresh = false);
         Task<Recipe> GetRecipeAsync(int recipeId);
-        Task<IEnumerable<IngredientQuantity>> GetRecipeIngredients(int recipeId);
-        Task<IEnumerable<RecipeDirection>> GetRecipeDirections(int recipeId);
+        Task<(IEnumerable<IngredientQuantity>, IEnumerable<RecipeDirection>)?> GetRecipeDetailsAsync(int recipeId);
     }
 }

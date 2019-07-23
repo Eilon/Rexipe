@@ -169,14 +169,11 @@ namespace RexipeMobile.Services
             return Task.FromResult(_recipes.AsEnumerable());
         }
 
-        public Task<IEnumerable<IngredientQuantity>> GetRecipeIngredients(int recipeId)
+        public Task<(IEnumerable<IngredientQuantity>, IEnumerable<RecipeDirection>)?> GetRecipeDetailsAsync(int recipeId)
         {
-            return Task.FromResult(_recipes.FirstOrDefault(s => s.Id == recipeId).Ingredients.AsEnumerable());
-        }
-
-        public Task<IEnumerable<RecipeDirection>> GetRecipeDirections(int recipeId)
-        {
-            return Task.FromResult(_recipes.FirstOrDefault(s => s.Id == recipeId).Directions.AsEnumerable());
+            return Task.FromResult(((IEnumerable<IngredientQuantity>, IEnumerable<RecipeDirection>)?)(
+                _recipes.FirstOrDefault(s => s.Id == recipeId).Ingredients.AsEnumerable(),
+                _recipes.FirstOrDefault(s => s.Id == recipeId).Directions.AsEnumerable()));
         }
     }
 }
